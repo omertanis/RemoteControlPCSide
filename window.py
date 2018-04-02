@@ -98,9 +98,9 @@ class Application():
         B.config(font=("Helvetica", 20))
         B.pack()
 
-        B = Button(frameBluetooth, text="Run", command=self.useBluetooth2, background='#b3c6e5')
-        B.config(font=("Helvetica", 20))
-        B.pack()
+        # B = Button(frameBluetooth, text="Run", command=self.useBluetooth2, background='#b3c6e5')
+        # B.config(font=("Helvetica", 20))
+        # B.pack()
 
     def createWifiQr(self):
         frameWifi.configure(background='#299FD2')
@@ -122,11 +122,9 @@ class Application():
         B.config(font=("Helvetica", 20))
         B.pack()
 
-        B = Button(frameWifi, text="Run", command=self.useWifi, background='#b3c6e5')
-        B.config(font=("Helvetica", 20))
-        B.pack()
-
-
+        # B = Button(frameWifi, text="Run", command=self.useWifi, background='#b3c6e5')
+        # B.config(font=("Helvetica", 20))
+        # B.pack()
 
 
     def helloCallBack(self):
@@ -134,10 +132,13 @@ class Application():
         if(var.get() == 0):
             frameMain.pack_forget()
             frameBluetooth.pack()
+            self.useBluetooth2()
 
         else:
             frameMain.pack_forget()
             frameWifi.pack()
+            self.useWifi()
+
 
 if __name__ == '__main__':
     multiprocessing.freeze_support()
