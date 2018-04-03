@@ -9,9 +9,8 @@ print 'Connection address:', address
 
 while True:
     try:
-        data = connection.recv(1024)
+        data = connection.recv(64)
         if data != "":
-            print(data)
             datas = []
             datas = data.split("/")
 
@@ -27,8 +26,11 @@ while True:
                     mouse.press(Button.right)
                     mouse.release(Button.right)
                 else:
-                    mouseX, mouseY = (mouse.position)
-                    mouse.position = (mouseX + (int(datas[1]) / 5), (mouseY + int(datas[2]) / 5))
+                    count = len(datas) - (len(datas) % 3)
+                    for i in range(0,count,3):
+                        print(datas[i+1], datas[i+2])
+                        mouseX, mouseY = (mouse.position)
+                        mouse.position = (mouseX + (int(datas[i+1]) / 5), (mouseY + int(datas[i+2]) / 5))
             # if keyboard
             else:
                 from pynput.keyboard import Key, Controller

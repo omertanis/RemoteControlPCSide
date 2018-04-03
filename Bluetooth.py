@@ -15,9 +15,6 @@ print(server_sock.getsockname()[0])
 client_sock, address = server_sock.accept()
 print "Accepted connection from ",address
 
-def closeConnect():
-    print("ConnectionLost")
-    # client_sock.close()
 
 while True:
     try:
@@ -51,11 +48,9 @@ while True:
                     keyboard.release(datas[0])
 
         else:
-            closeConnect()
-            break
-            # print "connection lost"
-            # client_sock, address = server_sock.accept()
-            # print "Accepted connection from ", address
+            print "connection lost"
+            client_sock, address = server_sock.accept()
+            print "Accepted connection from ", address
     except Exception as e:
         print(e)
         pass
