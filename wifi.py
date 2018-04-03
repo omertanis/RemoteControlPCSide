@@ -1,16 +1,18 @@
 import socket
 from qrCreator import ipadress
+import time
 print("waiting")
-serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serversocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 serversocket.bind((ipadress, 8089))
-serversocket.listen(5) # become a server socket, maximum 5 connections
-connection, address = serversocket.accept()
-print 'Connection address:', address
+# serversocket.listen(5) # become a server socket, maximum 5 connections
+# connection, address = serversocket.accept()
+# print 'Connection address:', address
 
 while True:
     try:
-        data = connection.recv(64)
+        data, addr = serversocket.recvfrom(64)
         if data != "":
+            time.sleep(0.012)
             datas = []
             datas = data.split("/")
 
@@ -26,11 +28,9 @@ while True:
                     mouse.press(Button.right)
                     mouse.release(Button.right)
                 else:
-                    count = len(datas) - (len(datas) % 3)
-                    for i in range(0,count,3):
-                        print(datas[i+1], datas[i+2])
-                        mouseX, mouseY = (mouse.position)
-                        mouse.position = (mouseX + (int(datas[i+1]) / 5), (mouseY + int(datas[i+2]) / 5))
+
+                    mouseX, mouseY = (mouse.position)
+                    mouse.position = (mouseX + (int(datas[1]) / 5), (mouseY + int(datas[2]) / 5))
             # if keyboard
             else:
                 from pynput.keyboard import Key, Controller
