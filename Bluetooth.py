@@ -1,4 +1,5 @@
 import bluetooth
+import time
 # -*- coding: utf-8 -*-
 
 server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
@@ -10,7 +11,7 @@ bluetooth.advertise_service(server_sock, "helloService",
                      service_classes=[bluetooth.SERIAL_PORT_CLASS],
                      profiles=[bluetooth.SERIAL_PORT_PROFILE])
 
-print("basliyor")
+print("bluetooth baglanti bekleniyor...")
 print(server_sock.getsockname()[0])
 client_sock, address = server_sock.accept()
 print "Accepted connection from ",address
@@ -18,8 +19,9 @@ print "Accepted connection from ",address
 
 while True:
     try:
-        data = client_sock.recv(1024)
+        data = client_sock.recv(64)
         if data != "":
+            time.sleep(0.005)
             datas = []
             datas = data.split("/")
 
@@ -33,8 +35,9 @@ while True:
                 elif(datas[1] == "right"):
                     mouse.press(Button.right)
                     mouse.release(Button.right)
+                elif(datas[1] == "scroll"):
+                    mouse.scroll(0, int(datas[2])/5)
                 else:
-                    print datas[1], datas[2]
                     mouseX, mouseY = (mouse.position)
                     mouse.position = (mouseX + (int(datas[1])/5), (mouseY +int(datas[2])/5))
             # if keyboard
@@ -48,7 +51,7 @@ while True:
                     keyboard.release(datas[0])
 
         else:
-            print "connection lost"
+            print("bluetooth baglanti bekleniyor...")
             client_sock, address = server_sock.accept()
             print "Accepted connection from ", address
     except Exception as e:
