@@ -39,7 +39,7 @@ while True:
                     mouse.scroll(0, int(datas[2])/5)
                 else:
                     mouseX, mouseY = (mouse.position)
-                    mouse.position = (mouseX + (int(datas[1])/5), (mouseY +int(datas[2])/5))
+                    mouse.position = (mouseX + (int(datas[1])/10), (mouseY +int(datas[2])/10))
             # if keyboard
             else:
                 from pynput.keyboard import Key, Controller

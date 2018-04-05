@@ -1,19 +1,19 @@
 import socket
 from qrCreator import ipadress
 import time
-print("wifi baglanti bekleniyor")
+print("wifi baglanti bekleniyor Top")
 serversocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 serversocket.bind((ipadress, 8089))
 # serversocket.listen(5) # become a server socket, maximum 5 connections
 # connection, address = serversocket.accept()
 # print 'Connection address:', address
 
-print("baglanti saglandi")
 while True:
     try:
         data, addr = serversocket.recvfrom(64)
         if data != "":
-            time.sleep(0.0117)
+            print(addr[0])
+            time.sleep(0.0145)
             datas = []
             datas = data.split("/")
 
@@ -32,7 +32,7 @@ while True:
                     mouse.scroll(0, int(datas[2]) / 5)
                 else:
                     mouseX, mouseY = (mouse.position)
-                    mouse.position = (mouseX + (int(datas[1]) / 5), (mouseY + int(datas[2]) / 5))
+                    mouse.position = (mouseX + (int(datas[1]) / 10), (mouseY + int(datas[2]) / 10))
             # if keyboard
             else:
                 from pynput.keyboard import Key, Controller
