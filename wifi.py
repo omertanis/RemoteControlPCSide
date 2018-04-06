@@ -4,9 +4,14 @@ import time
 print("wifi baglanti bekleniyor Top")
 serversocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 serversocket.bind((ipadress, 8089))
-# serversocket.listen(5) # become a server socket, maximum 5 connections
-# connection, address = serversocket.accept()
-# print 'Connection address:', address
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((ipadress, 8090))
+s.listen(1)
+
+connTCP, addrTCP = s.accept()
+print 'Connection address:', addrTCP
+
 
 while True:
     try:
@@ -45,6 +50,7 @@ while True:
                     keyboard.release(datas[0])
 
         else:
+            s.close()
             print("wifi baglanti bekleniyor")
             client_sock, address = serversocket.accept()
             print("baglanti saglandi")
