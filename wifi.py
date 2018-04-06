@@ -12,7 +12,7 @@ while True:
     try:
         data, addr = serversocket.recvfrom(64)
         if data != "":
-            print(addr[0])
+            # print(addr[0])
             time.sleep(0.0145)
             datas = []
             datas = data.split("/")
@@ -29,7 +29,7 @@ while True:
                     mouse.press(Button.right)
                     mouse.release(Button.right)
                 elif (datas[1] == "scroll"):
-                    mouse.scroll(0, int(datas[2]) / 5)
+                    mouse.scroll(0, int(datas[2]))
                 else:
                     mouseX, mouseY = (mouse.position)
                     mouse.position = (mouseX + (int(datas[1]) / 10), (mouseY + int(datas[2]) / 10))

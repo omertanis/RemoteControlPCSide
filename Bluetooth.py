@@ -16,7 +16,6 @@ print(server_sock.getsockname()[0])
 client_sock, address = server_sock.accept()
 print "Accepted connection from ",address
 
-
 while True:
     try:
         data = client_sock.recv(64)
@@ -36,7 +35,7 @@ while True:
                     mouse.press(Button.right)
                     mouse.release(Button.right)
                 elif(datas[1] == "scroll"):
-                    mouse.scroll(0, int(datas[2])/5)
+                    mouse.scroll(0, int(datas[2]))
                 else:
                     mouseX, mouseY = (mouse.position)
                     mouse.position = (mouseX + (int(datas[1])/10), (mouseY +int(datas[2])/10))
