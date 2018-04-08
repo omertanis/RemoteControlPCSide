@@ -5,6 +5,7 @@ import PIL
 import ttk
 import time
 import qrCreator
+
 # -*- coding: utf-8 -*-
 class Application():
 
@@ -148,6 +149,8 @@ class Application():
             self.useBluetooth2()
 
         else:
+            from qrCreator import createWifi
+            createWifi()
             frameMain.pack_forget()
             frameWifi.pack()
             self.useWifi()
