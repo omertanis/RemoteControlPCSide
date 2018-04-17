@@ -6,7 +6,8 @@ server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 server_sock.bind(("",bluetooth.PORT_ANY))
 server_sock.listen(1)
 
-
+print("anan")
+print server_sock
 bluetooth.advertise_service(server_sock, "helloService",
                      service_classes=[bluetooth.SERIAL_PORT_CLASS],
                      profiles=[bluetooth.SERIAL_PORT_PROFILE])
@@ -20,13 +21,15 @@ while True:
     try:
         data = client_sock.recv(64)
         if data != "":
-            time.sleep(0.005)
+            time.sleep(0.0075)
             datas = []
             datas = data.split("/")
 
             # if mouse
             if(datas[0] == "mouse"):
                 from pynput.mouse import Button, Controller
+                print(data)
+
                 mouse = Controller()
                 if(datas[1] == "left"):
                     mouse.press(Button.left)
@@ -45,6 +48,8 @@ while True:
                 keyboard = Controller()
                 if (datas[0]) == "Backspace":
                     keyboard.press(Key.backspace)
+                elif(datas[0]) == "Enter":
+                    keyboard.press(Key.enter)
                 else:
                     keyboard.press(datas[0])
                     keyboard.release(datas[0])

@@ -25,7 +25,6 @@ while True:
             # if mouse
             if (datas[0] == "mouse"):
                 from pynput.mouse import Button, Controller
-
                 mouse = Controller()
                 if (datas[1] == "left"):
                     mouse.press(Button.left)
@@ -45,6 +44,8 @@ while True:
                 keyboard = Controller()
                 if (datas[0]) == "Backspace":
                     keyboard.press(Key.backspace)
+                elif (datas[0]) == "Enter":
+                    keyboard.press(Key.enter)
                 else:
                     keyboard.press(datas[0])
                     keyboard.release(datas[0])
