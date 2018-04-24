@@ -1,7 +1,6 @@
 import bluetooth
 import time
 # -*- coding: utf-8 -*-
-
 server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 server_sock.bind(("",bluetooth.PORT_ANY))
 server_sock.listen(1)
@@ -37,6 +36,7 @@ while True:
                     mouse.press(Button.right)
                     mouse.release(Button.right)
                 elif (datas[1] == "scroll"):
+                    print(datas[2])
                     mouse.scroll(0, int(datas[2]))
                 else:
                     mouseX, mouseY = (mouse.position)
@@ -141,7 +141,7 @@ while True:
                             keyboard.press(Key.ctrl)
                             keyboard.press("p")
                             keyboard.release(Key.ctrl)
-                            
+
                         elif (datas[2] == "ctrl+w"):
                             keyboard.press(Key.ctrl)
                             keyboard.press("w")
@@ -157,6 +157,8 @@ while True:
 
 
                     else:
+                        if (datas[1] == ""):
+                            keyboard.press("/")
                         keyboard.press(datas[1])
                         keyboard.release(datas[1])
 

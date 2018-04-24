@@ -12,7 +12,6 @@ s.listen(1)
 connTCP, addrTCP = s.accept()
 print 'Connection address:', addrTCP
 
-
 while True:
     try:
         data, addr = serversocket.recvfrom(64)
@@ -151,8 +150,9 @@ while True:
                         elif (datas[2] == "enter"):
                             keyboard.press(Key.enter)
 
-
                     else:
+                        if(datas[1] == ""):
+                            keyboard.press("/")
                         keyboard.press(datas[1])
                         keyboard.release(datas[1])
 

@@ -22,16 +22,17 @@ def createWifi():
 
 def createBluetooth():
     try:
+
         server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
         server_sock.bind(("", bluetooth.PORT_ANY))
-
         macAddress=server_sock.getsockname()[0]
         url = pyqrcode.create(macAddress)
         url.png('bluetooth.png', scale=10)
     except Exception as e:
-        url = pyqrcode.create("0.0.0.0")
+        url = pyqrcode.create("0.0.0.0.0.0")
         url.png('bluetooth.png', scale=10)
         print("bluetooth hata")
+
 
 createBluetooth()
 createWifi()
